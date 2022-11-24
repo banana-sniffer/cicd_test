@@ -16,7 +16,7 @@ export class CicdTestStack extends Stack {
           // 'pwd',
           // 'ls',
           // 'npm -v',
-          // 'npm install',
+          'npm install',
           'npm ci',
           'npm run build', 
           'npx cdk synth'
