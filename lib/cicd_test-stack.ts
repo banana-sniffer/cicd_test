@@ -12,12 +12,14 @@ export class CicdTestStack extends cdk.Stack {
       synth: new ShellStep('Synth', {
         input: CodePipelineSource.gitHub('banana-sniffer/cicd_test', 'main'), //Remember to change 
         commands: [
-          'cd mysubdir',
+          'pwd',
+          'ls',
+          'cd cdk',
           'npm ci', 
           'npm run build', 
           'npx cdk synth'
         ],
-        primaryOutputDirectory: 'mysubdir/cdk.out',
+        primaryOutputDirectory: 'cdk/cdk.out',
       })
     });
   }
