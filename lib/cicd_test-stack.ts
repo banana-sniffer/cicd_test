@@ -14,12 +14,12 @@ export class CicdTestStack extends cdk.Stack {
         commands: [
           'pwd',
           'ls',
-          'cd cdk',
+          'npm -v',
           'npm ci', 
           'npm run build', 
           'npx cdk synth'
         ],
-        primaryOutputDirectory: 'cdk/cdk.out',
+        primaryOutputDirectory: 'cdk.out',
       })
     });
   }
