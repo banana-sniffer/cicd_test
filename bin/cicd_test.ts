@@ -7,7 +7,7 @@ const app = new cdk.App();
 new CicdTestStack(app, 'CicdTestStack', {
   env: {
     account: '450729639506',
-    region: 'us-west-1',
+    region: 'us-west-2',
   }
 });
 
