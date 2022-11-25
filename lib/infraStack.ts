@@ -1,16 +1,19 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { Function, Runtime, Code} from 'aws-cdk-lib/aws-lambda';
-import * as path from 'path';
+import { Function, Runtime, Code } from 'aws-cdk-lib/aws-lambda';
 import * as apigateway from 'aws-cdk-lib/aws-apigateway';
+import * as s3 from 'aws-cdk-lib/aws-s3'
 
 export class InfraStack extends cdk.Stack {
     constructor(scope: Construct, id: string, stageName: string, props?: cdk.StackProps) {
       super(scope, id, props);
+
+      const lambdaCodeBucket = s3.Bucket.fromBucketName(this, 'lambdaCodeBucket', 'github-to-lambda-s3-test')
+
       const lambdaFunction = new Function(this, 'LambdaFunction', {
-        runtime: Runtime.NODEJS_16_X,
-        handler: 'handler.handler',
-        code: Code.fromAsset(path.join(__dirname, 'lambda')), //resolving to ./lambda directory
+        runtime: Runtime.PYTHON_3_9,
+        handler: 'lambda_function.lambda_handler',
+        code: Code.fromBucket(lambdaCodeBucket, 'deployment_package.zip'),
         environment: { "stageName": stageName } //inputting stagename
       });
 
