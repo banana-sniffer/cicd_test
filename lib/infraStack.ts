@@ -5,10 +5,10 @@ import * as path from 'path';
 
 export class InfraStack extends cdk.Stage {
     
-    constructor(scope: Construct, stageName: string, props?: cdk.StageProps) {
+    constructor(scope: Construct, stageName: string, props?: cdk.StackProps) {
       super(scope, stageName, props);
 
-      const lambdaFunction = new Function(scope, 'LambdaFunction', {
+      const lambdaFunction = new Function(this, 'LambdaFunction', {
         runtime: Runtime.NODEJS_16_X,
         handler: 'handler.handler',
         // Need to modify the code portion so that it pulls from an s3 bucket
