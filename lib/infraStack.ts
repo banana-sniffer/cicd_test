@@ -14,7 +14,8 @@ export class InfraStack extends cdk.Stack {
         runtime: Runtime.PYTHON_3_9,
         handler: 'lambda_function.lambda_handler',
         code: Code.fromBucket(lambdaCodeBucket, 'deployment_package.zip'),
-        environment: { "stageName": stageName } //inputting stagename
+        functionName: 'testingFunction',
+        environment: { "stageName": stageName }
       });
 
       const api = new apigateway.RestApi(this, 'api', {

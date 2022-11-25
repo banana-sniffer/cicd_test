@@ -2,7 +2,6 @@
 import { Stack, StackProps } from 'aws-cdk-lib'
 import { Construct } from 'constructs';
 import { CodePipeline, CodePipelineSource, ShellStep } from 'aws-cdk-lib/pipelines';
-import { ManualApprovalStep } from 'aws-cdk-lib/pipelines';
 import { MyPipelineAppStage } from './stage'
 
 export class CicdTestStack extends Stack {
@@ -12,7 +11,7 @@ export class CicdTestStack extends Stack {
     const pipeline = new CodePipeline(this, 'Pipeline', {
       pipelineName: 'TestPipeline',
       synth: new ShellStep('Synth', {
-        input: CodePipelineSource.gitHub('banana-sniffer/cicd_test', 'main'), //Remember to change 
+        input: CodePipelineSource.gitHub('banana-sniffer/cicd_test', 'main'), 
         commands: [
           'npm install',
           'npm ci',
