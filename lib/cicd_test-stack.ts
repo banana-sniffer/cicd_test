@@ -26,17 +26,5 @@ export class CicdTestStack extends Stack {
     const testingStage = pipeline.addStage(new MyPipelineAppStage(this, "test", {
       env: { account: "450729639506", region: "us-west-2" }
     }));
-
- 
-    testingStage.addPre(new ShellStep("Run Unit Tests", { commands: ['npm install', 'npm test'] }));
-    testingStage.addPost(new ManualApprovalStep('Manual approval before production'));
-
-    const prodStage = pipeline.addStage(new MyPipelineAppStage(this, "prod", {
-      env: { account: "450729639506", region: "us-west-2" }
-    }));
-
-    // Adding in a random comment
-
-
   }
 }
